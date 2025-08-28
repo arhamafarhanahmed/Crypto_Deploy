@@ -17,16 +17,17 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-app.use(cors({
-  origin: [
-    "https://crypto-deploy-nine.vercel.app",  // tumhara frontend domain
-    "http://localhost:5173"                   // local testing
-  ],
-  credentials: true,
-  methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
-  allowedHeaders: ["Content-Type", "Authorization"]
-}));
-
+app.use(
+  cors({
+    origin: [
+      "https://crypto-deploy-nine.vercel.app", // tumhara frontend domain
+      "http://localhost:5173",                 // local testing
+    ],
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 // Security
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
@@ -44,12 +45,8 @@ app.use((req, res) => {
   res.status(404).json({ status: "error", message: "Route not found" });
 });
 
-// Production export or local dev server
-if (process.env.NODE_ENV === "production") {
-  module.exports = app;
-} else {
-  const port = process.env.PORT || 8005;
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
-}
+// ✅ Always listen (both local + production)
+const port = process.env.PORT || 8005;
+app.listen(port, () => {
+  console.log(`✅ Server is running on port ${port}`);
+});
