@@ -5,7 +5,7 @@ const helmet = require("helmet");
 const authRouter = require("./router/authRouter");
 const textRouter = require("./router/router");
 const { securityHeaders, errorHandler } = require("./middleware/security");
-const connectDB = require("./database/connection"); // connection.js import
+const connectDB = require("./database/connection");
 
 const app = express();
 
@@ -57,12 +57,8 @@ app.use((req, res) => {
   res.status(404).json({ status: "error", message: "Route not found" });
 });
 
-// Production export or local dev server
-if (process.env.NODE_ENV === "production") {
-  module.exports = app;
-} else {
-  const port = process.env.PORT || 8005;
-  app.listen(port, () => {
-    console.log(`Server is running on port ${port}`);
-  });
-}
+// ✅ Always listen (Render requires this)
+const port = process.env.PORT || 8005;
+app.listen(port, "0.0.0.0", () => {
+  console.log(`🚀 Server is running on port ${port}`);
+});
