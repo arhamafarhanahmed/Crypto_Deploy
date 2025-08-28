@@ -81,10 +81,10 @@ connectDB();
 
 // Allowed origins with better flexibility
 const allowedOrigins = [
-  "https://crypto-deploy-nine.vercel.app",
-  "http://localhost:5173",
-  "http://localhost:3000",
-  "http://localhost:8005"
+  "https://crypto-deploy-nine.vercel.app"
+  // "http://localhost:5173",
+  // "http://localhost:3000",
+  // "http://localhost:8005"
 ];
 
 // Middleware
