@@ -20,7 +20,7 @@ app.use(express.urlencoded({ extended: true }));
 // CORS configuration
 app.use(cors({
   origin: process.env.NODE_ENV === "production"
-    ? "https://defistakedtwt.vercel.app/"
+    ? "https://crypto-deploy-nine.vercel.app"
     : "http://localhost:5173",
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
