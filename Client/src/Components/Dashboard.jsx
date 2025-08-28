@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { Trash2, RefreshCcw, AlertCircle } from "lucide-react";
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8005";
 
 const Dashboard = () => {
   const [user, setUser] = useState(null);
@@ -19,7 +18,7 @@ const Dashboard = () => {
       setLoading(true);
       setError(null);
 
-      const response = await fetch(`${BASE_URL}/api/get-texts`, {
+      const response = await fetch(`https://crypto-deploy-1.onrender.com/api/get-texts`, {
         headers: token ? { Authorization: `Bearer ${token}` } : {},
       });
 
@@ -45,7 +44,7 @@ const Dashboard = () => {
       }
 
       try {
-        const response = await fetch(`${BASE_URL}/api/auth/me`, {
+        const response = await fetch(`https://crypto-deploy-1.onrender.com/api/auth/me`, {
           headers: {
             Authorization: `Bearer ${token}`,
             "Content-Type": "application/json",
@@ -76,7 +75,7 @@ const Dashboard = () => {
     try {
       setDeleteLoading(id);
 
-      const response = await fetch(`${BASE_URL}/api/delete-text/${id}`, {
+      const response = await fetch(`https://crypto-deploy-1.onrender.com/api/delete-text/${id}`, {
         method: "DELETE",
         headers: {
           Authorization: `Bearer ${localStorage.getItem("token")}`,

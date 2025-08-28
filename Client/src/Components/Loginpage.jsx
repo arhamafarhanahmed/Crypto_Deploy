@@ -6,7 +6,7 @@ import { Eye, EyeOff } from "lucide-react"
 import { useAuth } from "../context/AuthContext"
 import "../index.css"
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8005"
+// const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8005"
 
 const Loginpage = () => {
   const { login } = useAuth()
@@ -96,10 +96,10 @@ const Loginpage = () => {
         }
       }
 
-      console.log("Making request to:", `${BASE_URL}${endpoint}`)
+      console.log("Making request to:", `https://crypto-deploy-1.onrender.com${endpoint}`)
       console.log("Request body:", body)
 
-      const response = await fetch(`${BASE_URL}/api/auth${endpoint}`, {
+      const response = await fetch(`https://crypto-deploy-1.onrender.com/api/auth${endpoint}`, {
         method: "POST",
         headers: headers,
         body: JSON.stringify(body),

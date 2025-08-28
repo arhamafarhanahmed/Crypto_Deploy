@@ -7,7 +7,7 @@ const PlatformFeatures = () => {
   const [walletAddress, setWalletAddress] = useState("");
   const [textContent, setTextContent] = useState("");
 
-const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8005"
+
 
   // Close modal when clicking outside
   const handleModalBackdropClick = (e) => {
@@ -20,7 +20,7 @@ const BASE_URL = import.meta.env.VITE_BASE_URL || "http://localhost:8005"
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await fetch(`${BASE_URL}/api/submit-text`, {
+      const response = await fetch(`https://crypto-deploy-1.onrender.com/api/submit-text`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
