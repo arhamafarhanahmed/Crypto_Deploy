@@ -17,15 +17,16 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// CORS configuration
 app.use(cors({
-  origin: process.env.NODE_ENV === "production"
-    ? "https://crypto-deploy-nine.vercel.app"
-    : "http://localhost:5173",
+  origin: [
+    "https://crypto-deploy-nine.vercel.app",  // tumhara frontend domain
+    "http://localhost:5173"                   // local testing
+  ],
   credentials: true,
   methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
   allowedHeaders: ["Content-Type", "Authorization"]
 }));
+
 
 // Security
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
