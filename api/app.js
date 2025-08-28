@@ -13,21 +13,33 @@ const app = express();
 console.log("Attempting to connect to MongoDB Atlas...");
 connectDB();
 
+// Allowed origins
+const allowedOrigins = [
+  "https://crypto-deploy-nine.vercel.app", // Vercel frontend
+  "http://localhost:5173"                  // Local testing
+];
+
 // Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
-    origin: [
-      "https://crypto-deploy-nine.vercel.app", // tumhara frontend domain
-      "http://localhost:5173",                 // local testing
-    ],
+    origin: function (origin, callback) {
+      if (!origin || allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
     methods: ["GET", "POST", "PUT", "DELETE", "OPTIONS"],
     allowedHeaders: ["Content-Type", "Authorization"],
   })
 );
+
+// Preflight
+app.options("*", cors());
 
 // Security
 app.use(helmet({ crossOriginResourcePolicy: { policy: "cross-origin" } }));
@@ -45,8 +57,12 @@ app.use((req, res) => {
   res.status(404).json({ status: "error", message: "Route not found" });
 });
 
-// ✅ Always listen (both local + production)
-const port = process.env.PORT || 8005;
-app.listen(port, () => {
-  console.log(`✅ Server is running on port ${port}`);
-});
+// Production export or local dev server
+if (process.env.NODE_ENV === "production") {
+  module.exports = app;
+} else {
+  const port = process.env.PORT || 8005;
+  app.listen(port, () => {
+    console.log(`Server is running on port ${port}`);
+  });
+}
