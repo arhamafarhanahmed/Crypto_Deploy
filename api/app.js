@@ -15,7 +15,7 @@ connectDB();
 
 // Allowed origins with better flexibility
 const allowedOrigins = [
-  "https://ddefistakedwted.vercel.app/"
+  "https://ddefistakedwted.vercel.app"
   // "http://localhost:5173",
   // "http://localhost:3000",
   // "http://localhost:8005"
