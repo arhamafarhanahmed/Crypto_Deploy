@@ -12,7 +12,7 @@ const apiLimiter = rateLimit({
 // Security headers middleware
 const securityHeaders = (req, res, next) => {
   // CORS headers
-  res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL || 'https://ddefistakedwted.vercel.app/');
+  res.setHeader('Access-Control-Allow-Origin', process.env.CLIENT_URL || 'https://ddefistakedwted.vercel.app');
   res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
   res.setHeader('Access-Control-Allow-Credentials', 'true');
